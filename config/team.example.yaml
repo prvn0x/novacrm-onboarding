@@ -1,0 +1,13 @@
+# Copy to config/team.yaml (git-ignored) and fill in. People here are the demo cast.
+cs_manager: {name: Priya Sharma, email: priya@example.com}          # Rocketlane project owner
+escalation_channel: cs-onboarding-escalations                        # Slack channel for HUMAN_REVIEW
+account_executives:                                                  # the sender allow-list (A1)
+  - {name: Rahul Mehta, email: rahul@example.com, phone: "+919800000001"}
+dedicated_csms:                                                      # Enterprise (A7)
+  - {name: Asha Rao, email: asha@example.com}
+pooled_csm: {name: Growth CS Team, email: growth-cs@example.com}    # Growth
+rocketlane:
+  mode: template                   # or "api": phases and tasks from onboarding_plan.yaml, no templates
+  templates:                       # template mode only: ids from the UI; durations as verify-platform reports
+    enterprise: {template_id: 111, pm_placeholder_id: 112, customer_placeholder_id: 113, planned_duration_days: 30}
+    growth:     {template_id: 221, pm_placeholder_id: 222, customer_placeholder_id: 223, planned_duration_days: 14}

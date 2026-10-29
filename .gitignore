@@ -1,0 +1,15 @@
+.private/
+.env
+*.db
+*.sqlite
+var/
+__pycache__/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+credentials*.json
+token*.json
+.idea/
+.DS_Store
+config/team.yaml

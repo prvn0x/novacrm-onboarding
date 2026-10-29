@@ -1,0 +1,41 @@
+{
+  "name": "NovaCRM onboarding - plan tier check",
+  "firstMessage": "Hi {{ae_first_name}}, this is NovaCRM's automated onboarding assistant, calling about the new deal with {{customer_name}}. Is {{customer_name}} on the Enterprise plan or the Growth plan?",
+  "transcriber": {
+    "provider": "deepgram",
+    "model": "nova-3",
+    "language": "en",
+    "keyterm": [
+      "Enterprise",
+      "Growth",
+      "Enterprise plan",
+      "Growth plan"
+    ]
+  },
+  "model": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are NovaCRM's automated onboarding assistant on a short phone call with a sales rep (the AE) about the deal with {{customer_name}}. You have ONE job: learn whether the customer is on the Enterprise plan or the Growth plan, and confirm it.\n\nRules:\n1. You have already asked the question. Wait for the answer.\n2. If you did not catch the answer, or it does not clearly name Enterprise or Growth (for example a misheard word), say 'Sorry, I didn't catch that. Is it Enterprise or Growth?' Do this at most twice. Never end the call just because an answer was unclear.\n3. If the AE names exactly one plan, read it back in these exact words: for Enterprise, 'Just to confirm: Enterprise, the 30-day onboarding with a dedicated CSM. Is that right?'; for Growth, 'Just to confirm: Growth, the 14-day onboarding with our pooled CS team. Is that right?'\n4. If they say yes, say 'Thank you, the onboarding will be set up now. Goodbye.' and end the call.\n5. If they say no, hesitate, or name both plans, ask the question once more. If it is still not clear, say 'No problem, I will ask the CS team to follow up. Goodbye.' and end the call.\n6. If they say they do not know or need to check, say 'No problem, I will ask the CS team to follow up. Goodbye.' and end the call.\n7. Never guess, never suggest a plan, never discuss anything else. Keep the call under one minute. If asked, say you are an automated assistant."
+      }
+    ]
+  },
+  "endCallFunctionEnabled": true,
+  "maxDurationSeconds": 120,
+  "silenceTimeoutSeconds": 20,
+  "endCallMessage": "Goodbye.",
+  "voicemailMessage": "Hi, this is NovaCRM's onboarding assistant about the {{customer_name}} deal. I'll try again shortly.",
+  "voicemailDetection": {
+    "provider": "vapi",
+    "type": "audio",
+    "backoffPlan": {
+      "startAtSeconds": 2,
+      "frequencySeconds": 2.5,
+      "maxRetries": 5
+    },
+    "beepMaxAwaitSeconds": 12
+  }
+}

@@ -1,0 +1,23 @@
+# Slack: api.slack.com/apps → Create New App → From an app manifest → paste this → Install.
+# Then copy the "Bot User OAuth Token" (xoxb-...) into .env as SLACK_BOT_TOKEN.
+display_information:
+  name: NovaCRM Onboarding
+  description: Creates customer onboarding channels and posts escalations.
+features:
+  bot_user:
+    display_name: NovaCRM Onboarding
+    always_online: true
+oauth_config:
+  scopes:
+    bot:
+      - channels:manage
+      - channels:read
+      - channels:join
+      - channels:history
+      - chat:write
+      - users:read
+      - users:read.email
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
